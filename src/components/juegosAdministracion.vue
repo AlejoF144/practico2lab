@@ -2,80 +2,83 @@
     <div class="appContainer">
         <h1>Administración de videojuegos</h1>
         <div class="form-container">
-            <div class="input-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre">
-            </div>
+            <h2>Nuevo videojuego</h2>
+            <label>Nombre: </label>
+            <input type="text" v-model="juegosDatos.nombre">
+
 
             <div class="input-group">
-                <label for="plataforma">Plataforma:</label>
-                <select id="plataforma">
+                <label>Plataforma: </label>
+                <select id="plataforma" v-model="juegosDatos.plataforma">
                     <option value="PC">PC</option>
                     <option value="Xbox">Xbox</option>
                     <option value="Playstation">Playstation</option>
-                </select>
-            </div>
+                </select><br>
 
-            <div class="input-group">
-                <label for="estado">Estado:</label>
-                <select id="estado">
+                <label>Estado: </label>
+                <select id="estado" v-model="juegosDatos.estado">
                     <option value="Pendiente">Pendiente</option>
                     <option value="Jugando">Jugando</option>
                     <option value="Completado">Completado</option>
                 </select>
             </div>
 
-            <div class="input-group">
-                <label >Calificación:</label>
-                <select id="calificacion">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-            </div>
+            <label>Puntaje: </label>
+            <input type="number" v-model="juegosDatos.puntaje" min=1 max=10>
         </div>
-
-        <button>Registrar juego</button>
+        <button @click="handleSend">Registrar videojuego</button>
     </div>
+    <listContainer :juegos="juegos" />
 </template>
+
 <script setup>
+import listContainer from "./juegosLista.vue"
+import { ref } from "vue"
+
+const juegosDatos = ref({
+    nombre: "",
+    plataforma: "PC",
+    estado: "Pendiente",
+    puntaje: 1
+})
+let juegos = ref([])
+function errores(puntaje, nombre) {
+    // Verificacion de errores
+    if (puntaje < 1 || puntaje > 10) {
+        return true
+    }
+    if (nombre == "") {
+        return true
+    }
+    return false
+}
+function limpiarInput() {
+    juegosDatos.value = {
+        nombre: "",
+        plataforma: "PC",
+        estado: "Pendiente",
+        puntaje: 1
+    }
+}
+const handleSend = () => {
+    if (errores(juegosDatos.value.puntaje, juegosDatos.value.nombre)) {
+        alert(":(")
+    } else {
+        juegos.value.push({
+            nombre: juegosDatos.value.nombre,
+            plataforma: juegosDatos.value.plataforma,
+            estado: juegosDatos.value.estado,
+            puntaje: juegosDatos.value.puntaje,
+        })
+    }
+    limpiarInput()
+}
 
 </script>
 
 <style scoped>
-.appContainer {
-    margin: 20px;
-    padding: 20px;
-    text-align: center;
-
-}
-
-input[type="text"],
-input[type="number"],
-select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
+select,
 button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
 }
 </style>
