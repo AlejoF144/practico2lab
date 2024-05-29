@@ -1,45 +1,21 @@
 <template>
-    <div class="listFilter">
-        <h3>Lista de videojuegos</h3>
-        <div class="search-container">
-            <div class="input-group">
-                <label>Nombre: </label>
-                <input type="text" id="buscar-nombre">
-            </div>
-
-            <div class="input-group">
-                <label>Plataforma: </label>
-                <select id="buscar-plataforma">
-                    <option value="PC">PC</option>
-                    <option value="Xbox">Xbox</option>
-                    <option value="Playstation">Playstation</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>Estado: </label>
-                <select id="buscar-estado">
-                    <option value="Pendiente">Pendiente</option>
-                    <option value="Jugando">Jugando</option>
-                    <option value="Completado">Completado</option>
-                </select>
-            </div>
-        </div>
-    </div>
     <div class="listContainer">
-        <!--tabla, conteniendo datos de la lista-->
         <table>
             <tr>
                 <th>Nombre</th>
                 <th>Plataforma</th>
                 <th>Estado</th>
                 <th>Puntaje</th>
+                <th>Más info</th>
             </tr>
             <tr v-for="(juego, index) in juegos" :key="index">
                 <td>{{ juego.nombre }}</td>
                 <td>{{ juego.plataforma }}</td>
                 <td>{{ juego.estado }}</td>
                 <td>{{ juego.puntaje }}</td>
+                <td>
+                    <infoButton :juegosInfo="juego" />
+                </td>
             </tr>
         </table>
     </div>
@@ -47,10 +23,11 @@
 
 <script setup>
 import { defineProps } from "vue"
-
+import infoButton from "./infoButton.vue"
 defineProps({
     juegos: Array
 })
+
 
 
 </script>
