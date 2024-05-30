@@ -1,7 +1,7 @@
 <template>
     <div class="listContainer">
         <!--Tabla contenedora de todos los datos, iterandolos-->
-        <table>
+        <table id="juegosTable">
             <tr>
                 <th>Nombre</th>
                 <th>Plataforma</th>
@@ -21,6 +21,37 @@
         </table>
     </div>
 </template>
+
+<style>
+#juegosTable{
+   margin-left:50ch;
+   margin-top: 2.62pc;
+}
+#juegosTable td, #juegosTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#juegosTable{
+    font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+
+#juegosTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #068f5d;
+  color: white;
+}
+#juegosTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#juegosTable tr:hover {background-color: #ddd;}
+
+</style>
 
 <script setup>
 import { defineProps } from "vue"
