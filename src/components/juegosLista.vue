@@ -1,5 +1,6 @@
 <template>
     <div class="listContainer">
+        <!--Tabla contenedora de todos los datos, iterandolos-->
         <table>
             <tr>
                 <th>Nombre</th>

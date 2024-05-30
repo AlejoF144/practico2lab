@@ -1,4 +1,5 @@
 <template>
+    <!--Modal a mostrar en caso de presionarlo en infoButton-->
     <div class="modal">
         <div class="modal-inner">
             <h1>
@@ -17,7 +18,9 @@
 
 <script setup>
 import { defineEmits, defineProps } from "vue"
-const emitEvent = defineEmits(["close"])
+// Emit, emitirá una señal (por así decirlo) que será escuchada en infoButton, cerrará el modal
+const emitEvent = defineEmits(["close"]) // Nombre de la señal a escuchar, no estoy muy seguro 
+
 defineProps({
     juegosInfo: Array
 })

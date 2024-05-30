@@ -6,6 +6,7 @@
             <div class="input-group">
                 <label>Nombre: </label>
                 <input type="text" v-model="juegosDatos.nombre">
+                <div class="nombreError" v-if="juegosDatos.nombre == ''">Nombre no valido.</div>
 
                 <label>Plataforma: </label>
                 <select id="plataforma" v-model="juegosDatos.plataforma">
@@ -24,16 +25,16 @@
 
             <label>Puntaje: </label>
             <input type="number" v-model="juegosDatos.puntaje" min=1 max=10>
+            <div class="puntajeError" v-if="juegosDatos.puntaje < 1 || juegosDatos.puntaje > 10">Puntaje no valido.</div>
         </div>
         <button @click="handleSend">Registrar videojuego</button>
     </div>
+    <!--Componente que recibe el array contenedor de todos los juegos-->
     <listContainer :juegos="juegos" />
-    <modalError v-if="showModalError" :razon="razon" :contenido="contenido" @close="closeModalError"/>
 </template>
 
 <script setup>
 import listContainer from "./juegosLista.vue"
-import modalError from "./modalError.vue"
 import { ref } from "vue"
 // Objecto que contiene los datos bindeados a los input
 const juegosDatos = ref({
@@ -42,26 +43,9 @@ const juegosDatos = ref({
     estado: "Pendiente",
     puntaje: 1
 })
-let showModalError = ref(false)
-let razon, contenido = ""
 // Array que contendrá los datos de juegosDatos
 let juegos = ref([])
-// Verificacion de errores
-function errores(puntaje, nombre) {
-    if (puntaje < 1 || puntaje > 10) {
-        razon = "Ingrese un puntaje válido."
-        contenido = "El puntaje debe ser un número mayor a 0 y menor a 10"
-        showModalError.value = true
-        return true
-    }
-    if (nombre == "") {
-        razon = "Ingrese un nombre válido."
-        contenido = "El nombre no puede estar vacío."
-        showModalError.value = true
-        return true
-    }
-    return false
-}
+
 // Luego de agregar los datos al array, esta función limpiará los input
 function limpiarInput() {
     juegosDatos.value = {
@@ -71,9 +55,19 @@ function limpiarInput() {
         puntaje: 1
     }
 }
+// Verificacion de errores
+function errores(puntaje, nombre) {
+    if (puntaje < 1 || puntaje > 10) {
+        return true
+    }
+    if (nombre == "") {
+        return true
+    }
+    return false
+}
 // Agrega, en caso de no encontrar errores, los datos al array "juegos"
 const handleSend = () => {
-    if (!(errores(juegosDatos.value.puntaje, juegosDatos.value.nombre))) {
+    if (!errores(juegosDatos.value.puntaje, juegosDatos.value.nombre)) {
         juegos.value.push({
             nombre: juegosDatos.value.nombre,
             plataforma: juegosDatos.value.plataforma,
@@ -82,10 +76,6 @@ const handleSend = () => {
         })
     }
     limpiarInput()
-}
-
-function closeModalError() {
-    showModalError.value = false
 }
 
 </script>
