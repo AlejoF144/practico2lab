@@ -1,7 +1,9 @@
 <template>
     <div class="appContainer">
-        <div id="tittle"> <h1>Administración de videojuegos</h1></div>
-       <div></div>
+        <div id="tittle">
+            <h1>Administración de videojuegos</h1>
+        </div>
+        <div></div>
         <div class="form-container">
             <h2>Nuevo videojuego</h2>
             <div class="input-group">
@@ -29,18 +31,15 @@
             <div class="puntajeError" v-if="juegosDatos.puntaje < 1 || juegosDatos.puntaje > 10">Puntaje no valido.</div>
             <button id="btnRegistrar" @click="handleSend">Registrar videojuego</button>
         </div>
-       
+
     </div>
     <!--Componente que recibe el array contenedor de todos los juegos-->
- <!-- <listFilter :juegos="juegos" />
-    <br> --> 
     <listContainer :juegos="juegos" />
-   
 </template>
 
 <script setup>
 import listContainer from "./juegosLista.vue"
- // import listFilter from "./juegosFiltro.vue"
+// import listFilter from "./juegosFiltro.vue"
 import { ref } from "vue"
 // Objecto que contiene los datos bindeados a los input
 const juegosDatos = ref({
@@ -87,35 +86,47 @@ const handleSend = () => {
 </script>
 
 <style scoped >
-
-#tittle{
+#tittle {
     text-align: center;
 }
 
 .form-container {
-    width: 400px; /* Ancho del rectángulo */
-    min-height: 300px; /* Altura mínima del rectángulo */
-    border: 1px solid #ccc; /* Borde del rectángulo */
-    border-radius: 4px; /* Bordes ligeramente redondeados */
-    padding: 20px; /* Espaciado interno */
-    margin: 20px 0; /* Espaciado superior e inferior */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
-    background-color: #f9f9f9; /* Color de fondo */
-    float: left; /* Alinear a la izquierda */
+    width: 400px;
+    /* Ancho del rectángulo */
+    min-height: 300px;
+    /* Altura mínima del rectángulo */
+    border: 1px solid #ccc;
+    /* Borde del rectángulo */
+    border-radius: 4px;
+    /* Bordes ligeramente redondeados */
+    padding: 20px;
+    /* Espaciado interno */
+    margin: 20px 0;
+    /* Espaciado superior e inferior */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Sombra para darle profundidad */
+    background-color: #f9f9f9;
+    /* Color de fondo */
+    float: left;
+    /* Alinear a la izquierda */
 }
 
 
-h1, h2 {
+h1,
+h2 {
     color: #333;
 }
 
-.input-group, table {
+.input-group,
+table {
     width: 100%;
     margin-top: 20px;
 }
 
 
-input[type="text"], select, input[type="number"] {
+input[type="text"],
+select,
+input[type="number"] {
     width: 100%;
     padding: 8px;
     margin: 5px 0;
@@ -139,9 +150,9 @@ button:hover {
 }
 
 /* Error messages styling */
-.nombreError, .puntajeError {
+.nombreError,
+.puntajeError {
     color: #d9534f;
     font-size: 14px;
 }
-
 </style>

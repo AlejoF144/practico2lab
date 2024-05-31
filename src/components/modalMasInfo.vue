@@ -34,7 +34,7 @@ function close() {
 
 <style scoped>
 .modal {
-    background-color: rgba(82, 82, 82, 0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     position: fixed;
     top: 50%;
     left: 50%;
@@ -49,7 +49,7 @@ function close() {
 
 .modal-inner {
     text-align:center;
-    background-color: aquamarine;
+    background-color: #068f5d;
     color: black;
     position: relative;
     max-width: 50%;
