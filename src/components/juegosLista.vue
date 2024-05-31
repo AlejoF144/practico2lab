@@ -1,5 +1,8 @@
 <template>
     <div class="listContainer">
+        <listFilter @search="handleSearch" />
+        <button @click="clearSearch">Clear Search</button>
+
         <!--Tabla contenedora de todos los datos, iterandolos-->
         <table id="juegosTable">
             <tr>
@@ -9,7 +12,7 @@
                 <th>Puntaje</th>
                 <th>Más info</th>
             </tr>
-            <tr v-for="(juego, index) in juegos" :key="index">
+            <tr v-for="(juego, index) in filteredItems" :key="index">
                 <td>{{ juego.nombre }}</td>
                 <td>{{ juego.plataforma }}</td>
                 <td>{{ juego.estado }}</td>
@@ -21,9 +24,35 @@
         </table>
     </div>
 </template>
+<script setup>
+import { defineProps, computed, ref } from "vue"
+import infoButton from "./infoButton.vue"
+import listFilter from "./juegosFiltro.vue"
 
+const props = defineProps({
+    juegos: Array
+})
+
+const searchFilter = ref('')
+
+const filteredItems = computed(() => {
+    if (searchFilter.value != "") {
+        return props.juegos.filter(item =>
+            item.nombre.includes(searchFilter.value) ||
+            item.estado.includes(searchFilter.value) ||
+            item.plataforma.includes(searchFilter.value))
+    }
+    return props.juegos
+})
+
+const handleSearch = (search) => {
+    searchFilter.value = search
+}
+const clearSearch = () => {
+    searchFilter.value = ""
+}
+</script>
 <style scoped>
-
 #juegosTable {
     margin-left: 60ch;
     margin-top: 2.62pc;
@@ -60,13 +89,3 @@
 }
 </style>
 
-<script setup>
-import { defineProps } from "vue"
-import infoButton from "./infoButton.vue"
-defineProps({
-    juegos: Array
-})
-
-
-
-</script>

@@ -4,21 +4,17 @@
         <div class="search-container">
             <div class="input-group">
                 <label>Nombre: </label>
-                <input type="text" id="buscar-nombre">
-            </div>
+                <input type="text" class="buscarNombre" @input="search">
 
-            <div class="input-group">
                 <label>Plataforma: </label>
-                <select id="buscar-plataforma">
+                <select class="buscarPlataforma" @input="search">
                     <option value="PC">PC</option>
                     <option value="Xbox">Xbox</option>
                     <option value="Playstation">Playstation</option>
                 </select>
-            </div>
 
-            <div class="input-group">
                 <label>Estado: </label>
-                <select id="buscar-estado">
+                <select class="buscarEstado" @input="search">
                     <option value="Pendiente">Pendiente</option>
                     <option value="Jugando">Jugando</option>
                     <option value="Completado">Completado</option>
@@ -29,6 +25,12 @@
 </template>
 
 <script setup>
+import { defineEmits} from "vue"
+const emit = defineEmits(["search"])
+
+const search = (e) => {
+    emit("search", e.target.value)   
+}
 
 </script>
 
