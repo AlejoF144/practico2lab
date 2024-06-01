@@ -13,6 +13,7 @@
 
                 <label>Plataforma: </label>
                 <select id="plataforma" v-model="juegosDatos.plataforma">
+                    <option value="" disabled selected>PC | PlayStation | Xbox One</option>
                     <option value="PC">PC</option>
                     <option value="Xbox">Xbox</option>
                     <option value="Playstation">Playstation</option>
@@ -20,6 +21,7 @@
 
                 <label>Estado: </label>
                 <select id="estado" v-model="juegosDatos.estado">
+                    <option value="" disabled selected>Pendiente | Jugando | Completado</option>
                     <option value="Pendiente">Pendiente</option>
                     <option value="Jugando">Jugando</option>
                     <option value="Completado">Completado</option>
@@ -39,13 +41,12 @@
 
 <script setup>
 import listContainer from "./juegosLista.vue"
-// import listFilter from "./juegosFiltro.vue"
 import { ref } from "vue"
 // Objecto que contiene los datos bindeados a los input
 const juegosDatos = ref({
     nombre: "",
-    plataforma: "PC",
-    estado: "Pendiente",
+    plataforma: "",
+    estado: "",
     puntaje: 1
 })
 // Array que contendrá los datos de juegosDatos
@@ -55,24 +56,24 @@ let juegos = ref([])
 function limpiarInput() {
     juegosDatos.value = {
         nombre: "",
-        plataforma: "PC",
-        estado: "Pendiente",
+        plataforma: "",
+        estado: "",
         puntaje: 1
     }
 }
 // Verificacion de errores
-function errores(puntaje, nombre) {
+function errores(puntaje, nombre, estado, plataforma) {
     if (puntaje < 1 || puntaje > 10) {
         return true
     }
-    if (nombre == "") {
+    if (nombre == "" || estado == "" || plataforma == "") {
         return true
     }
     return false
 }
 // Agrega, en caso de no encontrar errores, los datos al array "juegos"
 const handleSend = () => {
-    if (!errores(juegosDatos.value.puntaje, juegosDatos.value.nombre)) {
+    if (!errores(juegosDatos.value.puntaje, juegosDatos.value.nombre, juegosDatos.value.estado, juegosDatos.value.plataforma)) {
         juegos.value.push({
             nombre: juegosDatos.value.nombre,
             plataforma: juegosDatos.value.plataforma,

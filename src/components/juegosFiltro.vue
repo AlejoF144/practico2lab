@@ -8,6 +8,7 @@
 
                 <label>Plataforma: </label>
                 <select class="buscarPlataforma" @input="search">
+                    <option value="" disabled selected>PC | PlayStation | Xbox One</option>
                     <option value="PC">PC</option>
                     <option value="Xbox">Xbox</option>
                     <option value="Playstation">Playstation</option>
@@ -15,6 +16,7 @@
 
                 <label>Estado: </label>
                 <select class="buscarEstado" @input="search">
+                    <option value="" disabled selected>Pendiente | Jugando | Completado</option>
                     <option value="Pendiente">Pendiente</option>
                     <option value="Jugando">Jugando</option>
                     <option value="Completado">Completado</option>
@@ -25,11 +27,11 @@
 </template>
 
 <script setup>
-import { defineEmits} from "vue"
+import { defineEmits } from "vue"
 const emit = defineEmits(["search"])
 
 const search = (e) => {
-    emit("search", e.target.value)   
+    emit("search", e.target.value)
 }
 
 </script>
