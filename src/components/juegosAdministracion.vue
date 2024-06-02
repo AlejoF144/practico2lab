@@ -18,6 +18,7 @@
                     <option value="Xbox">Xbox</option>
                     <option value="Playstation">Playstation</option>
                 </select><br>
+        <div class="opcionError" v-if="juegosDatos.plataforma == ''" style="color: red;">Seleccione una plataforma.</div>
 
                 <label>Estado: </label>
                 <select id="estado" v-model="juegosDatos.estado">
@@ -26,11 +27,13 @@
                     <option value="Jugando">Jugando</option>
                     <option value="Completado">Completado</option>
                 </select>
+
+        <div class="opcionError" v-if="juegosDatos.estado == ''" style="color: red;">Seleccione un estado.</div>
             </div>
 
             <label>Puntaje: </label>
             <input type="number" v-model="juegosDatos.puntaje" min=1 max=10>
-            <div class="puntajeError" v-if="juegosDatos.puntaje < 1 || juegosDatos.puntaje > 10">Puntaje no valido.</div>
+            <div class="puntajeError" v-if="juegosDatos.puntaje !== '' && (juegosDatos.puntaje < 1 || juegosDatos.puntaje > 10)">Puntaje no valido.</div>
             <button id="btnRegistrar" @click="handleSend">Registrar videojuego</button>
         </div>
         <div class="listado">
@@ -51,7 +54,7 @@ const juegosDatos = ref({
     nombre: "",
     plataforma: "",
     estado: "",
-    puntaje: 1
+    puntaje: ""
 })
 // Array que contendrá los datos de juegosDatos
 let juegos = ref([])
@@ -67,11 +70,8 @@ function limpiarInput() {
 }
 // Verificacion de errores
 function errores(puntaje, nombre, estado, plataforma) {
-    if (puntaje < 1 || puntaje > 10) {
-        return true
-    }
-    if (nombre == "" || estado == "" || plataforma == "") {
-        return true
+    if ((puntaje !== "" && (puntaje < 1 || puntaje > 10)) || nombre == "" || estado == "" || plataforma == ""){ 
+        return true 
     }
     return false
 }
@@ -150,7 +150,7 @@ button:hover {
 
 /* Error messages styling */
 .nombreError,
-.puntajeError {
+.puntajeError, .opcionError {
     color: #d9534f;
     font-size: 14px;
 }
