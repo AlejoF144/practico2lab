@@ -1,15 +1,15 @@
 <template>
     <div class="appContainer">
         <div id="tittle">
-            <h1>Administración de videojuegos</h1>
+            <h1 style="background-color: rgb(52, 233, 173);">Administración de videojuegos</h1>
         </div>
         <div></div>
-        <div class="form-container">
+        <div class="form-container" >
             <h2>Nuevo videojuego</h2>
             <div class="input-group">
                 <label>Nombre: </label>
                 <input type="text" v-model="juegosDatos.nombre">
-                <div class="nombreError" v-if="juegosDatos.nombre == ''">Nombre no valido.</div>
+                <div class="nombreError" v-if="juegosDatos.nombre == ''" style="color: red;">Nombre no valido.</div>
 
                 <label>Plataforma: </label>
                 <select id="plataforma" v-model="juegosDatos.plataforma">
@@ -33,10 +33,14 @@
             <div class="puntajeError" v-if="juegosDatos.puntaje < 1 || juegosDatos.puntaje > 10">Puntaje no valido.</div>
             <button id="btnRegistrar" @click="handleSend">Registrar videojuego</button>
         </div>
+        <div class="listado">
+            <!--Componente que recibe el array contenedor de todos los juegos-->
+            <listContainer :juegos="juegos" />
+        </div>
 
     </div>
-    <!--Componente que recibe el array contenedor de todos los juegos-->
-    <listContainer :juegos="juegos" />
+    
+    
 </template>
 
 <script setup>
@@ -87,6 +91,7 @@ const handleSend = () => {
 </script>
 
 <style scoped >
+
 #tittle {
     text-align: center;
 }
@@ -106,16 +111,9 @@ const handleSend = () => {
     /* Espaciado superior e inferior */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     /* Sombra para darle profundidad */
-    background-color: #f9f9f9;
-    /* Color de fondo */
     float: left;
     /* Alinear a la izquierda */
-}
-
-
-h1,
-h2 {
-    color: #333;
+    background-color: rgb(1, 223, 116);
 }
 
 .input-group,

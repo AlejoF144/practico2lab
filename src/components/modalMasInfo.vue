@@ -3,14 +3,12 @@
     <div class="modal">
         <div class="modal-inner">
             <h1>
-                Más información
+                Información 
             </h1>
-            <p>
-                Nombre: {{ juegosInfo.nombre }} <br>
-                Estado: {{ juegosInfo.estado }} <br>
-                Plataforma: {{ juegosInfo.plataforma }} <br>
-                Puntaje: {{ juegosInfo.puntaje }} <br>
-            </p>
+            <p>Nombre: {{ juegosInfo.nombre }} </p>
+            <p>Estado: {{ juegosInfo.estado }} </p>
+            <p>Plataforma: {{ juegosInfo.plataforma }} </p>
+            <p>Puntaje: {{ juegosInfo.puntaje }} </p>
             <button class="close-btn" @click="close()">Cerrar</button>
         </div>
     </div>
@@ -46,9 +44,12 @@ function close() {
     align-items: center;
     justify-content: center;
 }
+p {
+  font-size: 20px; /* Aumenta el tamaño de la fuente */
+  margin-bottom: 20px; /* Añade separación entre los párrafos */
+}
 
 .modal-inner {
-    text-align:center;
     background-color: #068f5d;
     color: black;
     position: relative;

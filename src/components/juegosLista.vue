@@ -1,8 +1,9 @@
 <template>
     <div class="listContainer">
+    <div class="filtrado">
         <listFilter @search="handleSearch" />
-        <button @click="clearSearch">Clear Search</button>
-
+        <button @click="clearSearch">Lista Completa</button>
+    </div>
         <!--Tabla contenedora de todos los datos, iterandolos-->
         <table id="juegosTable">
             <tr>
@@ -53,9 +54,38 @@ const clearSearch = () => {
 }
 </script>
 <style scoped>
+.filtrado {
+    width: 400px;
+    /* Ancho del rectángulo */
+    min-height: 300px;
+    /* Altura mínima del rectángulo */
+    border: 1px solid #ccc;
+    /* Borde del rectángulo */
+    border-radius: 4px;
+    /* Bordes ligeramente redondeados */
+    padding: 20px;
+    /* Espaciado interno */
+    margin: 20px 0;
+    /* Espaciado superior e inferior */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Sombra para darle profundidad */
+    float: left;
+    /* Alinear a la izquierda */
+    background-color: rgb(1, 223, 116);
+}
+button {
+    background-color: #068f5d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
 #juegosTable {
-    margin-left: 60ch;
-    margin-top: 2.62pc;
+  width: 100%; /* Hace que la tabla use todo el ancho disponible */
+  table-layout: auto; /* Permite que la tabla ajuste el ancho de las columnas automáticamente */
+  border-collapse: collapse; /* Opcional: para estilos de borde */
 }
 
 #juegosTable td,
@@ -81,7 +111,7 @@ const clearSearch = () => {
 }
 
 #juegosTable tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: rgb(1, 223, 116);
 }
 
 #juegosTable tr:hover {

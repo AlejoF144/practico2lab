@@ -1,6 +1,6 @@
 <template>
     <div class="infoButton">
-        <button @click="toggleModal">+</button>
+        <button @click="toggleModal">info</button>
     </div>
     <!--modal es el componente a mostrar en caso de que el botón sea presionado-->
     <modal v-if="showModal" @close="toggleModal()" :juegosInfo="juegosInfo" />
